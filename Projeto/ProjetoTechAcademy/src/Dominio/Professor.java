@@ -4,8 +4,8 @@ package Dominio;
 public class Professor extends BasePessoa {
     private double salario;
 
-    public Professor(String nome, String cpf, double salario) {
-        super(nome, cpf);
+    public Professor(int codigo, String nome, String cpf, double salario) {
+        super(codigo, nome, cpf);
         this.salario = salario;
     }
 

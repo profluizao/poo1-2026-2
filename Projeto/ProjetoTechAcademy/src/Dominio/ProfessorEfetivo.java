@@ -4,8 +4,8 @@ package Dominio;
 public class ProfessorEfetivo extends Professor {
     private double trienio;
 
-    public ProfessorEfetivo(String nome, String cpf, double salario, double trienio) {
-        super(nome, cpf, salario);
+    public ProfessorEfetivo(int codigo, String nome, String cpf, double salario, double trienio) {
+        super(codigo, nome, cpf, salario);
         this.trienio = trienio;
     }
 

@@ -6,8 +6,8 @@ public class Aluno extends BasePessoa {
     private double nota;
 
     // Construtor chamando o construtor da superclasse (super)
-    public Aluno(String nome, String cpf, String matricula) {
-        super(nome, cpf);
+    public Aluno(int codigo, String nome, String cpf, String matricula) {
+        super(codigo, nome, cpf);
         this.matricula = matricula;
         this.nota = 0.0; // Nota inicial padrão
     }
