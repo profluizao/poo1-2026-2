@@ -32,9 +32,9 @@ public class Aluno extends BasePessoa {
     // Implementação do método abstrato herdado
     @Override
     public void exibir() {
-        System.out.println("[ALUNO] Nome: " + nome);
-        System.out.println(" | CPF: " + cpf);
-        System.out.println(" | Matrícula: " + matricula);
+        System.out.println("\n[ALUNO] Nome: " + nome);
+        System.out.print("CPF: " + cpf);
+        System.out.print(" | Matrícula: " + matricula);
         System.out.println(" | Nota: " + nota);
     }
 }

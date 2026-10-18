@@ -13,10 +13,10 @@ public class Colaborador extends BasePessoa{
 
     @Override
     public void exibir(){
-        System.out.println("[COLABORADOR] Codigo: " + this.codigo);
+        System.out.println("\n[COLABORADOR] Codigo: " + this.codigo);
         System.out.print("Nome: " + this.nome);
         System.out.print(" | CPF: " + this.cpf);
-        System.out.print(" | Cargo: " + this.cargo);
+        System.out.println(" | Cargo: " + this.cargo);
     }
 
     public Colaborador(){}

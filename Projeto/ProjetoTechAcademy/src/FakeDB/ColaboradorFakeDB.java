@@ -4,14 +4,11 @@ import java.util.ArrayList;
 
 import Dominio.Colaborador;
 
-public class ColaboradorFakeDB {
-    private ArrayList<Colaborador> dados;
+public class ColaboradorFakeDB 
+    extends BaseGenericaFakeDB<Colaborador>{
 
-    public ArrayList<Colaborador> getDados(){
-        return this.dados;
-    }
-
-    private void autoPreencher(){
+    @Override 
+    protected  void autoPreencher(){
         this.dados.add(new Colaborador(101, "Mateus Silva", "12301", "Estagiário"));
         this.dados.add(new Colaborador(102, "Marcos Oliveira", "12302", "Atendente"));
         this.dados.add(new Colaborador(103, "Pedro Santos", "12303", "Caixa"));
