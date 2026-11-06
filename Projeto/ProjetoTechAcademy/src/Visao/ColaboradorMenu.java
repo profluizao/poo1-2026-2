@@ -5,9 +5,10 @@ import java.util.Scanner;
 import Dominio.Colaborador;
 import Servico.ColaboradorSRV;
 
-public class ColaboradorMenu {
+public class ColaboradorMenu extends BaseMenu{
+
     private ColaboradorSRV servico;
-    private Scanner scan;
+
     private Colaborador colabSelecionado;
 
     public void iniciar(){
@@ -18,17 +19,7 @@ public class ColaboradorMenu {
         this.scan = new Scanner(System.in);
         int opcao = 0;
         while(opcao != 9){
-            System.out.println("\n\n");
-            System.out.println("----- Menu Principal [COLABORADOR] -----");
-            System.out.println("1 - Listar todos");
-            System.out.println("2 - Pesquisar Por Código");
-            System.out.println("3 - Incluir");
-            System.out.println("4 - Alterar");
-            System.out.println("5 - Excluir");
-            System.out.println("9 - Finalizar");
-            System.out.print("Escolha uma opção: ");
-            opcao = this.scan.nextInt();
-            this.scan.nextLine();
+            opcao = this.exibirMenuPai("COLABORADOR");
             switch (opcao) {
                 case 1:
                     this.listarTodos();
@@ -49,6 +40,8 @@ public class ColaboradorMenu {
                     System.out.println("TCHAU");
                     break;
                 default:
+                    System.out.println("Opção inválida, tente novamente!");
+                    this.pausar();
                     break;
             }
         }        
