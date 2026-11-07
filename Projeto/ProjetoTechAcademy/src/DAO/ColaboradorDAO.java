@@ -17,25 +17,42 @@ public class ColaboradorDAO
 
     @Override
     public Colaborador readOne(int codigo) {
-        // TODO Auto-generated method stub
+        for (Colaborador item : this.repositorio) {
+            if (item.getCodigo() == codigo){
+                return item;
+            }
+        }
         return null;
     }
 
     @Override
     public Colaborador update(Colaborador alterado) {
-        // TODO Auto-generated method stub
+        int codigoProcurado = alterado.getCodigo();
+        if (this.readOne(codigoProcurado) != null){
+            int index = this.repositorio.indexOf(alterado);
+            this.repositorio.set(index, alterado);
+            return alterado;
+        }
         return null;
     }
 
     @Override
     public Colaborador delete(Colaborador apagado) {
-        // TODO Auto-generated method stub
+        int codigoProcurado = apagado.getCodigo();
+        if (this.readOne(codigoProcurado) != null){
+            this.repositorio.remove(apagado);
+            return apagado;
+        }
         return null;
     }
 
     @Override
     public Colaborador deletePorID(int codigo) {
-        // TODO Auto-generated method stub
+        Colaborador apagado = this.readOne(codigo);
+        if (apagado != null){
+            this.repositorio.remove(apagado);
+            return apagado;
+        }
         return null;
     }
 

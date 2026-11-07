@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Dominio.Colaborador;
 import Servico.ColaboradorSRV;
 
-public class ColaboradorMenu extends BaseMenu{
+public class ColaboradorMenu extends BaseMenu implements IMenu{
 
     private ColaboradorSRV servico;
 
@@ -47,7 +47,8 @@ public class ColaboradorMenu extends BaseMenu{
         }        
     }
 
-    private void listarTodos(){
+    @Override 
+    public void listarTodos(){
         System.out.println("\n\n");
         System.out.println("***** LISTAR TODOS *****");
         for (Colaborador item : this.servico.listar()) {
@@ -55,17 +56,26 @@ public class ColaboradorMenu extends BaseMenu{
         }        
     }
 
-    private void pesquisarPorCodigo(){
+    @Override 
+    public void pesquisarPorCodigo(){
         System.out.println("\n\n");
         System.out.println("***** PESQUISAR POR CÓDIGO *****");
         System.out.print("Informe o código: ");
         int codigo = this.scan.nextInt();
         this.scan.nextLine();
         this.colabSelecionado = this.servico.buscar(codigo);
-        this.colabSelecionado.exibir();
+        if(this.colabSelecionado == null){
+            System.out.println("ERRO - Código inválido");
+            this.pausar();
+            return;
+        }
+        else{
+            this.colabSelecionado.exibir();
+        }
     }
 
-    private void incluir(){
+    @Override 
+    public void incluir(){
         System.out.println("\n\n");
         System.out.println("***** INCLUIR *****");
         System.out.print("Informe o nome: ");
@@ -79,55 +89,61 @@ public class ColaboradorMenu extends BaseMenu{
         novo.exibir();
     }
 
-    private void alterar(){
+    @Override 
+    public void alterar(){
         System.out.println("\n\n");
         System.out.println("***** ALTERAR *****");
         this.pesquisarPorCodigo();
-        int escolha = 0;
-        while(escolha != 9){
-            System.out.println("##### CAMPOS DISPONÍVEIS #####");
-            System.out.println("1 - Nome");
-            System.out.println("2 - CPF");
-            System.out.println("3 - Cargo");
-            System.out.println("9 - Salvar");
-            System.out.print("Escolha uma opção para alterar:");
-            escolha = this.scan.nextInt();
-            this.scan.nextLine();
-            String nome, cpf, cargo;
-            switch (escolha) {
-                case 1:
-                    System.out.print("Nome: ");
-                    nome = this.scan.nextLine();
-                    this.colabSelecionado.setNome(nome);
-                    break;
-                case 2:
-                    System.out.print("CPF: ");
-                    cpf = this.scan.nextLine();
-                    this.colabSelecionado.setCpf(cpf);
-                    break;
-                case 3:
-                    System.out.print("Cargo: ");
-                    cargo = this.scan.nextLine();
-                    this.colabSelecionado.setCargo(cargo);
-                    break;
-                case 9:
-                    this.colabSelecionado = 
-                        this.servico.alterar(this.colabSelecionado);
-                    this.colabSelecionado.exibir();
-                    break;
-                default:
-                    break;
+        if(this.colabSelecionado != null){
+            int escolha = 0;
+            while(escolha != 9){
+                System.out.println("##### CAMPOS DISPONÍVEIS #####");
+                System.out.println("1 - Nome");
+                System.out.println("2 - CPF");
+                System.out.println("3 - Cargo");
+                System.out.println("9 - Salvar");
+                System.out.print("Escolha uma opção para alterar:");
+                escolha = this.scan.nextInt();
+                this.scan.nextLine();
+                String nome, cpf, cargo;
+                switch (escolha) {
+                    case 1:
+                        System.out.print("Nome: ");
+                        nome = this.scan.nextLine();
+                        this.colabSelecionado.setNome(nome);
+                        break;
+                    case 2:
+                        System.out.print("CPF: ");
+                        cpf = this.scan.nextLine();
+                        this.colabSelecionado.setCpf(cpf);
+                        break;
+                    case 3:
+                        System.out.print("Cargo: ");
+                        cargo = this.scan.nextLine();
+                        this.colabSelecionado.setCargo(cargo);
+                        break;
+                    case 9:
+                        this.colabSelecionado = 
+                            this.servico.alterar(this.colabSelecionado);
+                        this.colabSelecionado.exibir();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
 
-    private void excluir(){
+    @Override 
+    public void excluir(){
         System.out.println("\n\n");
         System.out.println("***** EXCLUIR *****");
         this.pesquisarPorCodigo();
-        int codigo = this.colabSelecionado.getCodigo();
-        this.colabSelecionado = this.servico.excluirPorID(codigo);
-        this.colabSelecionado.exibir();
+        if(this.colabSelecionado != null){
+            int codigo = this.colabSelecionado.getCodigo();
+            this.colabSelecionado = this.servico.excluirPorID(codigo);
+            // this.colabSelecionado.exibir();
+        }
     }
 
     public ColaboradorMenu(){
